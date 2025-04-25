@@ -1,0 +1,29 @@
+<header class="md:hidden px-4 shadow-md flex justify-between items-center">
+    <div class="flex">
+        <a routerLink="/home">
+            <img src="/logo.png">
+        </a>
+    </div>
+
+    <div class="flex justify-center items-center gap-5">
+        <div class="flex">
+            <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/cart"><img src="/orangeShoppingCart.png"></a>
+            <span *ngIf="(cartCount$ | async) as count">
+                <span class="text-primary text-lg font-bold rounded-full" *ngIf="count > 0">{{ count }}</span>
+            </span>
+        </div>
+        <button class="md:hidden text-2xl text-primary" (click)="isOpen = !isOpen">☰</button>
+    </div>
+
+    <!-- Menú -->
+    <nav class="flex-col md:flex-row md:flex gap-4 absolute md:static top-20 left-0 w-full bg-light p-4 md:p-0 md:w-auto transition-all"
+        [ngClass]="{
+      'flex': isOpen,
+      'hidden': !isOpen,
+      'md:flex': true
+    }">
+        <a class="text-accent font-normal text-lg" (click)="isOpen = false" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/home">Inicio</a>
+        <a class="text-accent font-normal text-lg" (click)="isOpen = false" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/courses">Cursos</a>
+        <a class="text-accent font-normal text-lg" (click)="isOpen = false" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/professionals">Profesionales</a>
+    </nav>
+</header>

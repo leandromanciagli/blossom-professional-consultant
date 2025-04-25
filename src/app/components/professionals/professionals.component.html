@@ -1,0 +1,9 @@
+<div class="w-[90%] mx-auto md:w-full mt-5 mb-12">
+    <h2 class="text-4xl text-primary font-medium md:text-5xl">Conocé a nuestros profesionales</h2>
+</div>
+
+<div *ngFor="let row of groupedProfessionals">
+    <div class="flex flex-col justify-around gap-5 md:mb-16 md:flex-row">
+        <app-professional-card *ngFor="let professional of row" [professional]="professional"></app-professional-card>
+    </div>
+</div>

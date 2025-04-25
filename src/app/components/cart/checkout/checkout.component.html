@@ -1,0 +1,122 @@
+<form [formGroup]="payerForm" (ngSubmit)="paidCart()" autocomplete="off">
+    <div class="w-[90%] mx-auto md:w-full flex flex-col justify-center gap-20 md:flex-row md:justify-between md:gap-40 mb-15">
+        <div class="flex flex-col">
+            <div class="mt-5 mb-6">
+                <h2 class="text-4xl text-primary font-medium md:text-5xl">Carrito</h2>
+            </div>
+
+            <div *ngIf="cartItems$ | async as cartItems">
+                <div *ngIf="cartItems.length; else emptyCart">
+                    <ol class="flex gap-15 pl-5 mb-10 list-decimal">
+                        <li class="text-lg text-secondary font-medium">Carrito</li>
+                        <li class="text-lg text-secondary font-bold">Checkout</li>
+                        <li class="text-lg text-secondary font-medium">Pago</li>
+                    </ol>
+                    <div class="flex flex-col gap-5 md:min-w-140">
+                        <div class="flex justify-between gap-5">
+                            <div class="flex flex-col md:w-[50%]">
+                                <label for="payerName" class="form-label text-secondary">Nombre</label>
+                                <input 
+                                    id="payerName" 
+                                    type="text"
+                                    class="form-control rounded-xl border border-[#d9d9d9] placeholder-gray-400 px-4 py-2 w-full"
+                                    placeholder="Ingresá tu nombre" 
+                                    formControlName="payerName"
+                                >
+                                <div *ngIf="payerName.invalid && (payerName.dirty || payerName.touched)" class="text-xs text-red-500 mt-2 ml-4">
+                                    <div *ngIf="payerName.hasError('required')">
+                                        El nombre es requerido.
+                                    </div>
+                                    <div *ngIf="payerName.hasError('minlength')">
+                                        El nombre debe contener al menos 2 caracteres.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:w-[50%]">
+                                <label for="payerSurname" class="form-label text-secondary">Apellido</label>
+                                <input id="payerSurname" type="text"
+                                    class="form-control rounded-xl border border-[#d9d9d9] placeholder-gray-400 px-4 py-2 w-full"
+                                    placeholder="Ingresá tu apellido" formControlName="payerSurname">
+                                <div *ngIf="payerSurname.invalid && (payerSurname.dirty || payerSurname.touched)" class="text-xs text-red-500 mt-2 ml-4">
+                                    <div *ngIf="payerSurname.hasError('required')">
+                                        El apellido es requerido.
+                                    </div>
+                                    <div *ngIf="payerSurname.hasError('minlength')">
+                                        El apellido debe contener al menos 2 caracteres.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="payerEmail" class="form-label text-secondary">Email</label>
+                            <input 
+                                id="payerEmail" 
+                                type="email"
+                                class="form-control rounded-xl border border-[#d9d9d9] placeholder-gray-400 px-4 py-2 w-full"
+                                placeholder="Ingresá tu e-mail" 
+                                formControlName="payerEmail"
+                            >
+                            <div *ngIf="payerEmail.invalid && (payerEmail.dirty || payerEmail.touched)" class="text-xs text-red-500 mt-2 ml-4">
+                                <div *ngIf="payerEmail.hasError('required')">
+                                    El email es requerido.
+                                </div>
+                                <div *ngIf="payerEmail.hasError('email')">
+                                    El email es inválido.
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-sm"><span class="font-bold">Importante</span>: el email ingresado será utilizado para enviar el contenido de la compra.</span>
+                        <button
+                            type="button"
+                            class="flex justify-center items-center rounded-2xl bg-secondary text-white font-semibold text-lg shadow-lg cursor-pointer py-2 w-40"
+                            ariaCurrentWhenActive="page" 
+                            routerLinkActive="active" 
+                            routerLink="/cart"
+                        >
+                            Volver
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #emptyCart>
+            <div class="flex justify-center bg-[#F9F3EE] md:px-100 py-10 rounded-3xl">
+                <p class="text-secondary text-2xl text-center min-w-90 md:min-w-100">El carrito está vacío</p>
+            </div>
+        </ng-template>
+
+        <div *ngIf="cartItems$ | async as cartItems">
+            <div *ngIf="cartItems.length" class="flex flex-col rounded-3xl bg-[#F9F3EE] p-9 mt-5 min-w-80 md:min-w-100">
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold">Resúmen de la compra</h3>
+                </div>
+                <div class="flex flex-col gap-15">
+                    <ol class="list-decimal flex flex-col gap-5 pl-5">
+                        <li *ngFor="let item of cartItems" class="text-lg text-secondary">
+                            <div class="flex justify-between gap-10 pl-3">
+                                <span>{{ item.title }}</span>
+                                <span>${{ item.price }}</span>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div class="flex justify-between text-lg font-semibold ml-8">
+                        <span>Total</span>
+                        <span>${{ cartTotal$ | async }}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-15">
+                    <button
+                        type="submit"
+                        class="flex justify-center items-center w-full rounded-2xl bg-primary text-white font-semibold text-lg shadow-lg cursor-pointer py-2 disabled:bg-[#DBDBDB] disabled:cursor-default"
+                        [disabled]="!payerForm.valid"
+                    >
+                        Confirmar compra
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

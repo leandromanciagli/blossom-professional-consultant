@@ -1,0 +1,79 @@
+<div class="flex flex-col gap-20 mt-7 mb-15 w-[90%] mx-auto md:w-full" *ngIf="course">
+    <!-- COURSE DETAILS -->
+    <div class="flex flex-col justify-between gap-10 md:gap-20 md:flex-row">
+        <div class="flex flex-col gap-7 mt-10">
+            <h1 class="text-primary text-3xl font-semibold md:text-6xl">{{ course.title }}</h1>
+            <div>
+                <span class="text-xs text-secondary bg-[#d9d9d9] py-1 px-4 rounded-sm">{{ course.topic.name }}</span>
+            </div>
+            <p class="md:w-180">{{ course.descrip }}</p>
+        </div>
+        <div class="flex flex-col justify-between rounded-3xl border border-accent md:min-w-105 md:w-105 h-auto">
+            <div class="relative flex justify-center w-auto h-58 group cursor-pointer" (click)="previewVisible = true">
+                <img [src]="course.imageCover" class="w-full h-auto object-cover rounded-t-3xl">
+                <div class="absolute inset-0 bg-black/30 rounded-t-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" ></div>
+                <img src="/ico-play.png" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-12 z-20" >
+                <div class="absolute inset-0 flex items-end justify-center pb-4 z-20 transition-opacity duration-300">
+                    <span class="text-white text-sm font-semibold px-2 py-1 rounded">
+                        Vista previa de este curso
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex flex-col px-5 pt-5 pb-5 gap-10">
+                <div class="flex justify-between items-center pb-3">
+                    <div class="flex justify-center items-center gap-1">
+                        <span class="text-3xl font-semibold">${{ course.price }}</span>
+                        <span class="font-semibold text-base">ARS</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <img src="/ico-clock.png">
+                        <span class="text-base text-secondary">{{ course.duration }}</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <button
+                        (click)="addToCart(false)"
+                        class="py-2 flex justify-center items-center w-full rounded-2xl bg-primary text-white font-semibold text-lg shadow-lg gap-2 cursor-pointer"
+                    >
+                        Añadir al carrito
+                    </button>
+                    <button
+                        (click)="addToCart(true)"
+                        class="py-2 flex justify-center items-center w-full rounded-2xl bg-primary text-white font-semibold text-lg shadow-lg gap-2 cursor-pointer">
+                        Comprar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFESSIONAL DETAILS -->
+    <div>    
+        <h2 class="text-primary text-4xl font-medium mb-7">Conocé quién enseña el curso</h2>
+        <div class="flex flex-col items-center bg-accent rounded-6xl h-auto px-10 md:justify-between md:flex-row-reverse md:h-100 md:rounded-r-6xl md:rounded-l-none md:px-0">
+            <div class="flex flex-col my-6 md:my-0 md:px-20">
+                <img [src]="course.professional.avatar" class="rounded-full w-50 h-50 md:w-105 md:h-105 md:-translate-y-10">
+            </div>
+            <div class="flex flex-col items-center md:items-start md:pl-28 md:py-20 md:w-140">
+                <div>
+                    <h2 class="text-center text-3xl text-white font-bold mb-5 w-full md:text-5xl">{{ course.professional.name }}</h2>
+                </div>
+                <p class="text-white text-lg font-light tracking-normal mb-6">{{ course.professional.hobbies }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="previewVisible" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl overflow-hidden max-w-3xl w-full relative shadow-lg">
+        <button (click)="previewVisible = false"
+            class="absolute top-3 right-3 text-gray-500 hover:text-black text-xl font-bold z-10">
+            <img src="/ico-cancel.png" alt="Cerrar vista previa" class="cursor-pointer m-3">
+        </button>
+        <div class="w-full aspect-video">
+            <iframe [src]="course.videoPreview | safeUrl" class="w-full h-full" frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>

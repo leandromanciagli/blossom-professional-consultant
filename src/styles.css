@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #FD5D34;
+    --color-secondary: #616161;
+    --color-accent: #2E86AB;
+    --color-light: #FDF9F6;
+    --font-raleway: 'Raleway';
+    --radius-6xl: 4rem;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(40%); }
+    100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+
+.circle-5 {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.circle-10 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.professional-img-gradient {
+    background: #2E86AB;
+    background: linear-gradient(90deg, rgba(46, 134, 171, 1) 0%, rgba(253, 93, 52, 1) 100%);
+}
+
+
+/*
+
+html {
+    font-family: 'Raleway';
+    font-size: 62.5%;
+}
+
+input:focus {
+    border-color: rgb(97, 97, 97);
+    outline: none;
+}
+
+*/

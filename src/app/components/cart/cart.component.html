@@ -1,0 +1,79 @@
+<div class="w-[90%] mx-auto md:w-full flex flex-col justify-center gap-20 md:flex-row md:justify-between md:gap-60 mb-15">
+    <div class="flex flex-col">
+        <div class="mt-5 mb-6">
+            <h2 class="text-4xl text-primary font-medium md:text-5xl">Carrito</h2>
+        </div>
+
+        <div *ngIf="cartItems$ | async as cartItems">
+            <div *ngIf="cartItems.length; else emptyCart">
+                <ol class="flex gap-15 pl-5 mb-10 list-decimal">
+                    <li class="text-lg text-secondary font-bold">Carrito</li>
+                    <li class="text-lg text-secondary font-medium">Checkout</li>
+                    <li class="text-lg text-secondary font-medium">Pago</li>
+                </ol>
+                <div class="flex flex-col-reverse gap-5">
+                    <div *ngFor="let item of cartItems" class="flex flex-col gap-7 rounded-xl px-6 py-4 md:w-132 bg-[#F9F3EE]">
+                        <div class="flex justify-between items-center md:gap-35">
+                            <h3 class="text-xl font-semibold leading-none">{{ item.title }}</h3>
+                            <div class="flex justify-center items-center gap-1">
+                                <span class="text-3xl font-semibold">${{ item.price }}</span>
+                                <span class="font-semibold text-base">ARS</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-secondary bg-[#d9d9d9] py-1 px-4 rounded-sm">{{ item.topic.name }}</span>
+                            <button type="button" class="cursor-pointer" (click)="removeItem(item.id)">
+                                <img src="/trash.png">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #emptyCart>
+        <div class="flex justify-center bg-[#F9F3EE] md:px-100 py-10 rounded-3xl">
+            <p class="text-secondary text-2xl text-center min-w-90 md:min-w-100">El carrito está vacío</p>
+        </div>
+    </ng-template>
+
+    <div *ngIf="cartItems$ | async as cartItems">
+        <div *ngIf="cartItems.length" class="flex flex-col rounded-3xl bg-[#F9F3EE] p-9 mt-5 min-w-80 md:min-w-100">
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold">Resúmen de la compra</h3>
+            </div>
+            <div class="flex flex-col gap-15">
+                <ol class="list-decimal flex flex-col gap-5 pl-5">
+                    <li *ngFor="let item of cartItems" class="text-lg text-secondary">
+                        <div class="flex justify-between gap-10 pl-3">
+                            <span>{{ item.title }}</span>
+                            <span>${{ item.price }}</span>
+                        </div>
+                    </li>
+                </ol>
+        
+                <!-- <div class="flex justify-between">
+                    <span class="text-base text-secondary">Subtotal</span>
+                    <span class="text-base text-secondary">$5400</span>
+                </div> -->
+        
+                <div class="flex justify-between text-lg font-semibold ml-8">
+                    <span>Total</span>
+                    <span>${{ cartTotal$ | async }}</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-15">
+                <button 
+                    class="flex justify-center items-center w-full rounded-2xl bg-primary text-white font-semibold text-lg shadow-lg cursor-pointer py-2"
+                    ariaCurrentWhenActive="page" 
+                    routerLinkActive="active" 
+                    routerLink="/checkout"
+                >
+                    Continuar compra
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

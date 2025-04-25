@@ -1,0 +1,21 @@
+<header class="hidden md:block">
+    <nav class="flex justify-between items-center">
+        <div class="flex">
+            <a routerLink="/home" >
+                <img src="/logo.png">
+            </a>
+        </div>
+        <div class="flex gap-15 pr-5">
+            <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/home">Inicio</a>
+            <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/courses">Cursos</a>
+            <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/professionals">Profesionales</a>
+            <!-- <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/workshops">Workshops</a> -->
+            <div class="flex">            
+                <a class="text-accent font-normal text-lg" ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/cart"><img src="/orangeShoppingCart.png"></a>
+                <span *ngIf="(cartCount$ | async) as count">
+                    <span class="text-primary text-lg font-bold rounded-full" *ngIf="count > 0">{{ count }}</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+</header>

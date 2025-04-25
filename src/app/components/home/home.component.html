@@ -1,0 +1,70 @@
+<!-- PRESENTACION -->
+<div class="flex bg-primary text-white gap-15 py-10 md:py-0 md:h-121 md:rounded-t-6xl">
+    <div class="flex flex-col justify-center items-center w-[90%] mx-auto md:items-start md:ml-15 md:mt-10">
+        <h1 class="font-extrabold text-5xl md:text-7xl">Alcanzá tu mejor versión</h1>
+        <p class="font-light tracking-normal mt-2 mb-10 md:text-lg/5">
+            Te ayudamos a desarrollar las habilidades necesarias para lograr tus metas y tomar decisiones clave en tu vida. 
+            <span class="font-extrabold">Tu cambio empieza hoy</span>.
+        </p>
+        <button class="flex items-center rounded-xl bg-white text-accent text-lg font-bold shadow-lg px-5 py-3 cursor-pointer" (click)="scrollToLastCourses()">
+            Iniciá tu transformación
+        </button>
+    </div>
+    <div class="hidden md:block">
+        <img src="/index.png" class="w-170 h-auto -translate-x-8 translate-y-8">
+    </div>
+</div>
+
+<!-- ULTIMOS CURSOS -->
+<div class="mt-10 md:mt-22" #lastCourses>
+    <div class="flex justify-center text-center">
+        <h2 class="text-primary font-medium text-3xl my-6 mx-2 md:mt-5 md:mb-8 md:text-5xl">Descubrí nuestros últimos cursos</h2>
+    </div>
+
+    <div *ngFor="let row of latestCourses">
+        <div class="flex flex-col justify-center items-center gap-5 mb-5 md:mb-10 md:flex-row">
+            <app-course-card *ngFor="let course of row" [course]="course"></app-course-card>
+        </div>
+    </div>
+
+    <div class="flex justify-center mb-15 md:mb-7 md:justify-end">
+        <a ariaCurrentWhenActive="page" routerLinkActive="active" routerLink="/courses" class="underline text-primary font-extrabold text-lg">Ver todos los cursos</a>
+    </div>
+</div>
+
+<div class="flex justify-center items-center gap-3 mb-10">
+    <div class="flex items-center gap-3">
+        <div class="circle-5 bg-accent"></div>
+        <div class="circle-10 bg-accent"></div>
+    </div>
+    <h2 class="text-2xl text-accent font-bold">PRÓXIMAMENTE</h2>
+    <div class="flex items-center gap-3">
+        <div class="circle-10 bg-accent"></div>
+        <div class="circle-5 bg-accent"></div>
+    </div>
+</div>
+
+<!-- PROFESIONALES -->
+<div class="bg-accent md:mb-20 md:flex md:justify-between md:items-center md:h-125 md:rounded-r-6xl">
+    <div class="hidden md:flex md:flex-col">
+        <img src="/profesionalsEllipse1.png" class="w-110 h-auto -translate-x-10 translate-y-15">
+        <img src="/profesionalsEllipse2.png" class="w-70 h-auto translate-x-50 -translate-y-30">
+    </div>
+    <div class="flex flex-col justify-center items-center w-[90%] mx-auto py-10 md:px-25 md:py-32 md:w-[60%]">
+        <div>
+            <h2 class="text-4xl text-white font-bold mb-5 w-full md:text-5xl">Contactá con nuestros profesionales</h2>
+        </div>
+        <p class="text-white text-lg font-light tracking-normal mb-6">
+            Te ofrecemos asesoramiento y orientación personalizados trabajando juntos
+            para explorar tus necesidades, expectativas y posibilidades reales.
+        </p>
+        <!-- <div class="flex justify-end">
+            <button routerLink="/professionals" class="flex items-center rounded-xl bg-primary text-white text-lg font-medium shadow-lg px-10 py-2 cursor-pointer">
+                Agendá tu consulta
+            </button>
+        </div> -->
+    </div>
+</div>
+
+<app-workshops></app-workshops>
+<app-newsletter></app-newsletter>
