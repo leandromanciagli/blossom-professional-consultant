@@ -49,7 +49,7 @@ export class NewsletterComponent {
       {
         next: async (data) => {
           this.store.dispatch(hideLoader());
-          this.subscriber = data
+          this.subscriber = {}
           this.subscriptionForm = new FormGroup({
             subscriberEmail: new FormControl('', { validators: [Validators.required, Validators.email], nonNullable: true }),
           });
